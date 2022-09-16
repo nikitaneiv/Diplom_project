@@ -1,12 +1,15 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
     public class PlayerController : MonoBehaviour
     {
         private Vector2 targetPos;
-        private float laneOffset = 2.6f;
-        private float laneChangeSpeed = 15;
-        private float wallDistance = 1; // значение, чтобы не выйти за стену
+        private float rightPos = 1.3f;
+        private float leftPos = -1.3f;
+        private float positionY = -2f;
+        private float duration = 0.3f;
+        private float midPos = 1; 
 
         private SpriteRenderer _spriteRenderer;
 
@@ -19,22 +22,28 @@ using UnityEngine;
         
         private void MovePlayer(bool[] swipes)
         {
-            if (swipes[(int)SwipeController.Direction.Left] && targetPos.x > - wallDistance)
+            if (swipes[(int)SwipeController.Direction.Left] && targetPos.x > - midPos)
             {
-                targetPos = new Vector2(targetPos.x - laneOffset, transform.position.y);
+                SwipeLeftMove();
                 _spriteRenderer.flipX = false;
             }
-            if (swipes[(int)SwipeController.Direction.Right] && targetPos.x < wallDistance)
+
+            if (swipes[(int)SwipeController.Direction.Right] && targetPos.x < midPos)
             {
-                targetPos = new Vector2(targetPos.x + laneOffset, transform.position.y);
+                SwipeRightMove();
                 _spriteRenderer.flipX = true;
             }
-
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, laneChangeSpeed * Time.deltaTime);
-        
         }
-        
-            
+
+        private void SwipeLeftMove()
+        {
+            transform.DOMove(targetPos = new Vector2(leftPos, positionY), duration).SetEase(Ease.Linear);
+        }
+        private void SwipeRightMove()
+        {
+            transform.DOMove(targetPos = new Vector2(rightPos, positionY), duration).SetEase(Ease.Linear);
+        }
+
     }
 
 
