@@ -9,6 +9,10 @@ public class GenerateRoad : MonoBehaviour
     private int maxRoadCount = 3;
     private float speed = 0;
     private float maxSpeed = 2;
+    
+    // [SerializeField] private GameObject SpikePrefab;
+    // private List<GameObject> spikes = new List<GameObject>();
+    // private int maxSpikesCount = 5;
 
     private void Start()
     {
@@ -65,5 +69,10 @@ public class GenerateRoad : MonoBehaviour
        go.transform.SetParent(transform);
        roads.Add(go);
     }
-    
+
+    private void CreateSpikes()
+    {
+        
+    }
+
 }

@@ -44,6 +44,13 @@ using UnityEngine;
             transform.DOMove(targetPos = new Vector2(rightPos, positionY), duration).SetEase(Ease.Linear);
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.GetComponent<Spikes>())
+            {
+                Debug.Log("- 1 Life");
+            }
+        }
     }
 
 
