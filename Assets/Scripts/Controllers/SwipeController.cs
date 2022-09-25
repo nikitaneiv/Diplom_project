@@ -68,7 +68,7 @@ public class SwipeController : MonoBehaviour
 
     private void SendSwipe()
     {
-        if (swipe[0] || swipe[1] || swipe[2] || swipe[4])
+        if (swipe[0] || swipe[1] || swipe[2] || swipe[3])
         {
             //Debug.Log(swipe[0] + "|" + swipe[1] );
             MoveEvent?.Invoke(swipe);

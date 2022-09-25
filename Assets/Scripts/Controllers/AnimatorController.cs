@@ -6,13 +6,20 @@ public class AnimatorController : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
 
+    private string fly = "Fly";
+    private string swipeDown = "SwipeDown";
+    private string boost = "Boost";
     public void SetFlyTrigger()
     {
-        SetTrigger("Fly");
+        SetTrigger(fly);
     }
     public void SetSwipeDownTrigger()
     {
-        SetTrigger("SwipeDown");
+        SetTrigger(swipeDown);
+    }
+    public void SetBoostTrigger()
+    {
+        SetTrigger(boost);
     }
     
     

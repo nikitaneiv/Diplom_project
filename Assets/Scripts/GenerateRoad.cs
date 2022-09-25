@@ -68,9 +68,4 @@ public class GenerateRoad : MonoBehaviour
        roads.Add(go);
     }
 
-    private void CreateSpikes()
-    {
-        
-    }
-
 }

@@ -47,9 +47,9 @@ using UnityEngine;
                 SwipeDown();
             }
             
-            if (swipes[(int)SwipeController.Direction.Down] && targetPos.y < midPos)
+            if (swipes[(int)SwipeController.Direction.Up] && targetPos.y < midPos)
             {
-                //Анимация буста
+                SwipeUp();
             }
             
         }
@@ -68,11 +68,20 @@ using UnityEngine;
             _animatorController.SetSwipeDownTrigger();
         }
 
+        private void SwipeUp()
+        {
+            _animatorController.SetBoostTrigger();
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.GetComponent<Spikes>())
             {
                 Debug.Log("- 1 Life");
+            }
+            if (other.gameObject.GetComponent<Gold>())
+            {
+                Debug.Log("+ 1 Gold");
             }
         }
     }
