@@ -9,9 +9,9 @@ public class SwipeController : MonoBehaviour
 
     private const float SWIPE_THRESHOLD = 50;
 
-    public enum Direction { Left, Right };
+    public enum Direction { Left, Right, Down, Up };
 
-    private bool[] swipe = new bool[2];
+    private bool[] swipe = new bool[4];
 
     public delegate void MoveDelegate(bool[] swipes);
 
@@ -58,6 +58,8 @@ public class SwipeController : MonoBehaviour
             else
             {
                 // Вверх-вниз
+                swipe[(int)Direction.Down] = swipeDelta.y < 0;
+                swipe[(int)Direction.Up] = swipeDelta.y > 0;
             }
             SendSwipe();
         }
@@ -66,7 +68,7 @@ public class SwipeController : MonoBehaviour
 
     private void SendSwipe()
     {
-        if (swipe[0] || swipe[1])
+        if (swipe[0] || swipe[1] || swipe[2] || swipe[4])
         {
             //Debug.Log(swipe[0] + "|" + swipe[1] );
             MoveEvent?.Invoke(swipe);
@@ -84,7 +86,7 @@ public class SwipeController : MonoBehaviour
     {
         startTouch = swipeDelta = Vector2.zero;
         touchMoved = false;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
         {
             swipe[i] = false;
         }

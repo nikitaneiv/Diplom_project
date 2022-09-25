@@ -5,14 +5,12 @@ using UnityEngine;
 public class GenerateRoad : MonoBehaviour
 {
     [SerializeField] private GameObject roadPrefab;
+    
     private List<GameObject> roads = new List<GameObject>();
+    
     private int maxRoadCount = 3;
     private float speed = 0;
-    private float maxSpeed = 2;
-    
-    // [SerializeField] private GameObject SpikePrefab;
-    // private List<GameObject> spikes = new List<GameObject>();
-    // private int maxSpikesCount = 5;
+    private float maxSpeed = 5f;
 
     private void Start()
     {
@@ -54,7 +52,7 @@ public class GenerateRoad : MonoBehaviour
     }
     private void StartLevel()
     {
-        speed = maxSpeed;
+        speed = 3;
     }
 
     private void CreateNextRoad()

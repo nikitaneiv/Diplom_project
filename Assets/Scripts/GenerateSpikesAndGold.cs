@@ -7,16 +7,23 @@ public class GenerateSpikesAndGold : MonoBehaviour
 {
     [SerializeField] private GameObject spikePrefabRight;
     [SerializeField] private GameObject spikePrefabLeft;
-    
+    [SerializeField] private GameObject goldPrefabs;
+
     private List<GameObject> spikesLeft = new List<GameObject>();
     private List<GameObject> spikesRight = new List<GameObject>();
-    
-    private int maxSpikesCount = 8;
+    private List<GameObject> goldList = new List<GameObject>(); 
+     
+
+    private int maxSpikesCount = 4;
     private float speed = 0;
-    private float maxSpeed = 2;
+    private float maxSpeed = 5f;
+    private int maxGoldCount = 4;
     
-    private SpriteRenderer _spriteRenderer;
+    Vector3 posLeft = new Vector3 (-1.60f, 10, 0);
+    Vector3 posRight = new Vector3 (1.60f, 10, 0);
+    Vector3 posGold = new Vector3 (-1.60f, 12, 0);
     
+
     private void Start()
     {
         ResetLevel();
@@ -36,17 +43,28 @@ public class GenerateSpikesAndGold : MonoBehaviour
             spike.transform.position -= new Vector3(0 ,speed * Time.deltaTime, 0 );
         }
 
+        foreach (GameObject gold in goldList)
+        {
+            gold.transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+        }
+
         if (spikesLeft[0].transform.position.y < -5)
         {
             Destroy(spikesLeft[0]);
             spikesLeft.RemoveAt(0);
-            CreateLeftSpike();
+            CreateSpikes();
         }
         if (spikesRight[0].transform.position.y < -5)
         {
             Destroy(spikesRight[0]);
             spikesRight.RemoveAt(0);
-            CreateRightSpike();
+        }
+
+        if (goldList[0].transform.position.y < -5)
+        {
+            Destroy(goldList[0]);
+            goldList.RemoveAt(0);
+            CreateGold();
         }
     }
     
@@ -64,79 +82,63 @@ public class GenerateSpikesAndGold : MonoBehaviour
             spikesRight.RemoveAt(0);
         }
 
+        while (goldList.Count > 0)
+        {
+            Destroy(goldList[0]);
+            goldList.RemoveAt(0);
+        }
+
         for (int i = 0; i < maxSpikesCount; i++)
         {
-            CreateLeftSpike();
-            CreateRightSpike();
-            
+            CreateSpikes();
+        }
+
+        for (int i = 0; i < maxGoldCount; i++)
+        {
+            CreateGold();
         }
     }
     
     private void StartLevel()
     {
-        speed = maxSpeed;
+        speed = 3;
     }
     
-    private void CreateLeftSpike()
+    private void CreateSpikes()
     {
-       
-        Vector3 posLeft = new Vector3 (-1.60f, 2, 0);
+        var rnd = Random.Range(2, 10);
         
-        if (spikesLeft.Count > 0)
+        if (spikesLeft.Count > 0 )
         {
-            posLeft = spikesLeft[spikesLeft.Count - 1].transform.position + new Vector3(0, 4, 0);
+            posLeft = spikesLeft[spikesLeft.Count - 1].transform.position + new Vector3(0, rnd , 0);
         }
         
-        GameObject go = Instantiate(spikePrefabLeft, posLeft, Quaternion.identity);
-        go.transform.SetParent(transform);
-        spikesLeft.Add(go);
+        GameObject leftSpikes = Instantiate(spikePrefabLeft, posLeft, Quaternion.identity);
+        leftSpikes.transform.SetParent(transform);
+        spikesLeft.Add(leftSpikes);
+        
+        if (spikesRight.Count > -1 )
+        {
+            posRight = posLeft + new Vector3(3.20f, 4, 0);
+        }
+        
+        GameObject rightSpikes = Instantiate(spikePrefabRight, posRight, Quaternion.identity);
+        rightSpikes.transform.SetParent(transform);
+        spikesRight.Add(rightSpikes);
     }
-    private void CreateRightSpike()
+
+    private void CreateGold()
     {
-        Vector3 posRight = new Vector3 (1.60f, 4, 0);
-       
-        if (spikesRight.Count > 0 && spikesRight.Count < maxSpikesCount)
+        var rndY = Random.Range(2, 10);
+        var rndX = Random.Range(0, 3.20f);
+        if (goldList.Count > 0 )
         {
-            posRight = spikesRight[spikesRight.Count - 1].transform.position + new Vector3(0, 4, 0);
+            posGold = posLeft + new Vector3(rndX, rndY , 0);
         }
-        
-        GameObject go = Instantiate(spikePrefabRight, posRight, Quaternion.identity);
-        go.transform.SetParent(transform);
-        spikesRight.Add(go);
+        GameObject Gold = Instantiate(goldPrefabs, posGold, Quaternion.identity);
+        Gold.transform.SetParent(transform);
+        goldList.Add(Gold);
     }
     
-    // private void GenerateWall()
-    // {
-    //     float roadLenght = 10;
-    //     float currentLenght = 3;
-    //     float startX = 2;
-    //     float xOffset = roadLenght / 2f;
-    //     
-    //     while (xOffset < roadLenght)
-    //     {
-    //         int intWallCount = 6;
-    //         int intWallPositionY = UnityEngine.Random.Range(0, 6);
-    //         if (intWallPositionY == 1)
-    //         {
-    //             intWallCount = 3;
-    //         }
-    //         if (intWallPositionY == 0)
-    //         {
-    //             intWallCount = 1;
-    //         }
-    //         for (int intWallPosition = intWallPositionY; intWallPosition < intWallCount; intWallPosition++)
-    //         {
-    //
-    //             float positionX = startX + intWallPosition * xOffset;
-    //
-    //             Vector3 localPosition = new Vector3(positionX, 0f, currentLenght);
-    //
-    //
-    //             GameObject go = Instantiate(spikePrefabLeft, localPosition, Quaternion.identity);
-    //             go.transform.SetParent(transform);
-    //             spikesLeft.Add(go);
-    //         }
-    //         currentLenght += UnityEngine.Random.Range(2, 4);
-    //     }
-    // }
+
 }
