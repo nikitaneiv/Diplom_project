@@ -7,7 +7,7 @@ public class GenerateRoad : MonoBehaviour
     [SerializeField] private GameObject roadPrefab;
     
     private List<GameObject> roads = new List<GameObject>();
-    
+
     private int maxRoadCount = 3;
     private float speed = 0;
     private float maxSpeed = 5f;
@@ -35,7 +35,7 @@ public class GenerateRoad : MonoBehaviour
 
     private void Update()
     {
-        if (speed == 0) return;
+        //if (speed == 0) return;
         if(IsActive != true) return;
 
         foreach (GameObject road in roads)
@@ -88,4 +88,5 @@ public class GenerateRoad : MonoBehaviour
     {
         _isActive = true;
     }
+   
 }

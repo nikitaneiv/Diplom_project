@@ -14,10 +14,12 @@ public class GameManager : MonoBehaviour
     private GameObject mouse;
     private GameData _gameData;
     private PlayerController _player;
+    private GenerateRoad _generateRoad;
+    private GenerateSpikesAndGold _generateSpikesAndGold;
     
     private int maxScore = 5000;
-    
-    
+
+    public PlayerController Player => _player;
 
     private void Awake()
     {
@@ -30,30 +32,14 @@ public class GameManager : MonoBehaviour
         GenerateMouse();
     }
 
-    // [SerializeField] private GameObject mousePrefab;
-    // private GameObject mouse;
-    // private PlayerController _player;
-    // private void Start()
-    // {
-    //     GenerateMouse();
-    // }
-    //
-    // public void GenerateMouse()
-    // {
-    //     mouse = Instantiate(mousePrefab, transform);
-    //     mouse.transform.localPosition = new Vector3(-1.3f, -2f, 0f);
-    //     _player = mouse.GetComponent<PlayerController>();
-    // }
-    
-
     public void StartGame()
     {
         UIController.ShowGameScreen();
         _goldText.text = _gameData.Golds.ToString();
         _player.AddGold += AddGold;
+        _player.OnDied += Dead;
         //AddScore();
         //_scoreText.text = _gameData.Score.ToString();
-        //GeneratePlayer.Player.OnDied += Dead;
     }
 
     private void Dead()
@@ -62,7 +48,6 @@ public class GameManager : MonoBehaviour
         //_saveController.SaveData(_gameData);
     }
     
-
     private void AddGold()
     {
         _gameData.Golds++;

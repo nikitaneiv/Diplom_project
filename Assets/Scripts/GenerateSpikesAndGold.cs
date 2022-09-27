@@ -47,7 +47,7 @@ public class GenerateSpikesAndGold : MonoBehaviour
     
     private void Update()
     {
-        if (speed == 0) return;
+        //if (speed == 0) return;
         if(IsActive != true) return;
 
         foreach (GameObject spike in spikesLeft)
@@ -160,4 +160,5 @@ public class GenerateSpikesAndGold : MonoBehaviour
     {
         _isActive = true;
     }
+    
 }

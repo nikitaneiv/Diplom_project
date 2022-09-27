@@ -15,8 +15,22 @@ using UnityEngine;
         private float midPos = 1; 
 
         private SpriteRenderer _spriteRenderer;
+        private Health _health;
+        
         public event Action AddGold;
-
+        public event Action OnDied;
+        
+        private int lives = 3;
+        public int Lives
+        {
+            get { return lives; }
+            set
+            {
+                if (value < 3) lives = value;
+                _health.Refresh();
+            }
+        }
+        
         private void Start()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -27,6 +41,7 @@ using UnityEngine;
         private void Update()
         {
             _animatorController.SetFlyTrigger();
+            _health = FindObjectOfType<Health>();
         }
 
         private void MovePlayer(bool[] swipes)
@@ -78,7 +93,7 @@ using UnityEngine;
         {
             if (other.gameObject.GetComponent<Spikes>())
             {
-                Debug.Log("- 1 Life");
+                Died();
             }
             if (other.gameObject.GetComponent<Gold>())
             {
@@ -86,7 +101,16 @@ using UnityEngine;
                 Debug.Log("+ 1 Gold");
             }
         }
-        
+
+        private void Died()
+        {
+            Lives--;
+            if (lives == 0)
+            {
+                OnDied?.Invoke();
+                Debug.Log("Game Over");
+            }
+        }
     }
 
 
