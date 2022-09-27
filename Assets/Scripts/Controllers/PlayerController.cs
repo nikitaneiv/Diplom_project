@@ -5,7 +5,7 @@ using UnityEngine;
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private AnimatorController _animatorController;
-        
+
         private Vector2 targetPos;
         
         private float rightPos = 1.3f;
@@ -15,6 +15,7 @@ using UnityEngine;
         private float midPos = 1; 
 
         private SpriteRenderer _spriteRenderer;
+        public event Action AddGold;
 
         private void Start()
         {
@@ -81,10 +82,13 @@ using UnityEngine;
             }
             if (other.gameObject.GetComponent<Gold>())
             {
+                AddGold?.Invoke();
                 Debug.Log("+ 1 Gold");
             }
         }
+        
     }
+
 
 
 

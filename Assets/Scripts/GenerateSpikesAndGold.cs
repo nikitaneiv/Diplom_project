@@ -23,6 +23,21 @@ public class GenerateSpikesAndGold : MonoBehaviour
     Vector3 posRight = new Vector3 (1.60f, 10, 0);
     Vector3 posGold = new Vector3 (-1.60f, 12, 0);
     
+    private bool _isActive = false;
+    
+    public bool IsActive
+    {
+        get
+        {
+            return _isActive;
+        }
+
+        set
+        {
+            if (value == true);
+            _isActive = value;
+        }
+    }
 
     private void Start()
     {
@@ -33,6 +48,7 @@ public class GenerateSpikesAndGold : MonoBehaviour
     private void Update()
     {
         if (speed == 0) return;
+        if(IsActive != true) return;
 
         foreach (GameObject spike in spikesLeft)
         {
@@ -139,6 +155,9 @@ public class GenerateSpikesAndGold : MonoBehaviour
         Gold.transform.SetParent(transform);
         goldList.Add(Gold);
     }
-    
 
+    public void StartMove()
+    {
+        _isActive = true;
+    }
 }

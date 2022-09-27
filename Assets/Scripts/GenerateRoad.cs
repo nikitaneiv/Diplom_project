@@ -12,6 +12,21 @@ public class GenerateRoad : MonoBehaviour
     private float speed = 0;
     private float maxSpeed = 5f;
 
+    private bool _isActive = false;
+    
+    public bool IsActive
+    {
+        get
+        {
+            return _isActive;
+        }
+
+        set
+        {
+            if (value == true);
+            _isActive = value;
+        }
+    }
     private void Start()
     {
         ResetLevel();
@@ -21,6 +36,7 @@ public class GenerateRoad : MonoBehaviour
     private void Update()
     {
         if (speed == 0) return;
+        if(IsActive != true) return;
 
         foreach (GameObject road in roads)
         {
@@ -67,5 +83,9 @@ public class GenerateRoad : MonoBehaviour
        go.transform.SetParent(transform);
        roads.Add(go);
     }
-
+    
+    public void StartMove()
+    {
+        _isActive = true;
+    }
 }
