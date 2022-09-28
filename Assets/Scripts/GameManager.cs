@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static SaveController;
@@ -7,17 +9,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Text _goldText;
     [SerializeField] private Text _scoreText;
+    [SerializeField] private Text _bestScoreText;
     [SerializeField] private UIController UIController;
     [SerializeField] private SaveController _saveController;
     [SerializeField] private GameObject mousePrefab;
-    
+
     private GameObject mouse;
     private GameData _gameData;
     private PlayerController _player;
-    private GenerateRoad _generateRoad;
-    private GenerateSpikesAndGold _generateSpikesAndGold;
-    
-    private int maxScore = 5000;
 
     public PlayerController Player => _player;
 
@@ -27,25 +26,22 @@ public class GameManager : MonoBehaviour
         _gameData = _saveController.LoadData();
     }
 
-    private void Start()
-    {
-        GenerateMouse();
-    }
-
     public void StartGame()
     {
+        GenerateMouse();
         UIController.ShowGameScreen();
         _goldText.text = _gameData.Golds.ToString();
         _player.AddGold += AddGold;
         _player.OnDied += Dead;
-        //AddScore();
-        //_scoreText.text = _gameData.Score.ToString();
+        StartCoroutine(ScoreCounterCoroutine());
+        BestScoreSave();
     }
 
     private void Dead()
     {
         UIController.ShowLoseScreen();
-        //_saveController.SaveData(_gameData);
+        StopCoroutine(ScoreCounterCoroutine());
+        _saveController.SaveData(_gameData);
     }
     
     private void AddGold()
@@ -54,19 +50,30 @@ public class GameManager : MonoBehaviour
         _goldText.text = _gameData.Golds.ToString();
     }
 
-    // private void AddScore()
-    // {
-    //     for (_gameData.Score = 0; _gameData.Score < maxScore; _gameData.Score++)
-    //     {
-    //         _scoreText.text = _gameData.Score.ToString();
-    //     }
-    //     
-    // }
-    
     private void GenerateMouse()
     {
         mouse = Instantiate(mousePrefab, transform);
         mouse.transform.localPosition = new Vector3(-1.3f, -2f, 0f);
         _player= mouse.GetComponent<PlayerController>();
     }
+
+    private void BestScoreSave()
+    {
+        if (_gameData.Score > _gameData.Score)
+        {
+            _bestScoreText.text = _gameData.Golds.ToString();
+        }
+    }
+
+    IEnumerator ScoreCounterCoroutine()
+    {
+        for (; ;)
+        {
+            _gameData.Score++;
+            yield return new WaitForSeconds(1f);
+            _scoreText.text = _gameData.Score.ToString();
+        }
+    }
+
 }
+

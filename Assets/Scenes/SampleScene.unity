@@ -183,10 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49b1062e6910684d8ecff7d487fa19e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiController: {fileID: 76770042}
-  _saveController: {fileID: 0}
   _goldText: {fileID: 1465297568}
   _scoreText: {fileID: 275125755}
+  UIController: {fileID: 1445630157}
+  _saveController: {fileID: 76770042}
+  mousePrefab: {fileID: 4164945500401305444, guid: 8dbfb3e9408020842906b1e566379ca8, type: 3}
 --- !u!4 &76770041
 Transform:
   m_ObjectHideFlags: 0
@@ -195,7 +196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76770036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 299.54187, y: 1024.1649, z: -11.281707}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211,12 +212,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 76770036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eb87e0f959ce5a4a99c4151f656a040, type: 3}
+  m_Script: {fileID: 11500000, guid: 68db696a832e9c8408725f921defa472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startScreen: {fileID: 1894021893}
-  _gameScreen: {fileID: 2096223904}
-  _loseScreen: {fileID: 754369179}
 --- !u!1 &203942788
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +785,7 @@ GameObject:
   - component: {fileID: 343076856}
   - component: {fileID: 343076855}
   m_Layer: 5
-  m_Name: Life_1
+  m_Name: Life0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1400,7 +1398,7 @@ GameObject:
   - component: {fileID: 766911372}
   - component: {fileID: 766911371}
   m_Layer: 5
-  m_Name: Life_2
+  m_Name: Life1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1675,6 +1673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1193120302}
+  - component: {fileID: 1193120303}
   m_Layer: 5
   m_Name: Life
   m_TagString: Untagged
@@ -1705,51 +1704,18 @@ RectTransform:
   m_AnchoredPosition: {x: 179, y: -108.51}
   m_SizeDelta: {x: 290.3305, y: 102.38}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1193801361
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1193801363}
-  - component: {fileID: 1193801362}
-  m_Layer: 0
-  m_Name: GenerateMouse
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1193801362
+--- !u!114 &1193120303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193801361}
+  m_GameObject: {fileID: 1193120301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80de75b21d73481f8fd14d95f7d8f5b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d5f80356e31432298a980d730f29004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePrefab: {fileID: 4164945500401305444, guid: 8dbfb3e9408020842906b1e566379ca8, type: 3}
---- !u!4 &1193801363
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193801361}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.0725275}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1215181387
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,6 +2061,7 @@ GameObject:
   - component: {fileID: 1445630156}
   - component: {fileID: 1445630155}
   - component: {fileID: 1445630154}
+  - component: {fileID: 1445630157}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2186,6 +2153,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1445630157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445630151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb87e0f959ce5a4a99c4151f656a040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startScreen: {fileID: 1894021893}
+  _gameScreen: {fileID: 2096223904}
+  _loseScreen: {fileID: 754369179}
 --- !u!1 &1465297565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,7 +2691,7 @@ GameObject:
   - component: {fileID: 2032061508}
   - component: {fileID: 2032061507}
   m_Layer: 5
-  m_Name: Life_3
+  m_Name: Life2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,21 +10,19 @@ public class GenerateSpikesAndGold : MonoBehaviour
     [SerializeField] private GameObject spikePrefabLeft;
     [SerializeField] private GameObject goldPrefabs;
 
+    [SerializeField] private GameSetteng _setting;
+
     private List<GameObject> spikesLeft = new List<GameObject>();
     private List<GameObject> spikesRight = new List<GameObject>();
-    private List<GameObject> goldList = new List<GameObject>(); 
-     
+    private List<GameObject> goldList = new List<GameObject>();
 
-    private int maxSpikesCount = 4;
-    private float speed = 0;
-    private float maxSpeed = 5f;
-    private int maxGoldCount = 4;
-    
     Vector3 posLeft = new Vector3 (-1.60f, 10, 0);
     Vector3 posRight = new Vector3 (1.60f, 10, 0);
     Vector3 posGold = new Vector3 (-1.60f, 12, 0);
     
     private bool _isActive = false;
+    
+    private SaveController.GameData _gameData;
     
     public bool IsActive
     {
@@ -47,21 +46,24 @@ public class GenerateSpikesAndGold : MonoBehaviour
     
     private void Update()
     {
-        //if (speed == 0) return;
         if(IsActive != true) return;
+        if (_setting.Speed < _setting.MaxSpeed)
+        {
+            _setting.Speed += 0.00005f;
+        }
 
         foreach (GameObject spike in spikesLeft)
         {
-            spike.transform.position -= new Vector3(0 ,speed * Time.deltaTime, 0 );
+            spike.transform.position -= new Vector3(0 ,_setting.Speed * Time.deltaTime, 0 );
         }
         foreach (GameObject spike in spikesRight)
         {
-            spike.transform.position -= new Vector3(0 ,speed * Time.deltaTime, 0 );
+            spike.transform.position -= new Vector3(0 ,_setting.Speed * Time.deltaTime, 0 );
         }
 
         foreach (GameObject gold in goldList)
         {
-            gold.transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+            gold.transform.position -= new Vector3(0, _setting.Speed * Time.deltaTime, 0);
         }
 
         if (spikesLeft[0].transform.position.y < -5)
@@ -86,7 +88,7 @@ public class GenerateSpikesAndGold : MonoBehaviour
     
     public void ResetLevel()
     {
-        speed = 0;
+        _setting.Speed = 0;
         while (spikesLeft.Count > 0)
         {
             Destroy(spikesLeft[0]);
@@ -104,12 +106,12 @@ public class GenerateSpikesAndGold : MonoBehaviour
             goldList.RemoveAt(0);
         }
 
-        for (int i = 0; i < maxSpikesCount; i++)
+        for (int i = 0; i < _setting.MaxSpikesCount; i++)
         {
             CreateSpikes();
         }
 
-        for (int i = 0; i < maxGoldCount; i++)
+        for (int i = 0; i < _setting.MaxGoldsCount; i++)
         {
             CreateGold();
         }
@@ -117,7 +119,7 @@ public class GenerateSpikesAndGold : MonoBehaviour
     
     private void StartLevel()
     {
-        speed = 3;
+        _setting.Speed = 3f;
     }
     
     private void CreateSpikes()
@@ -160,5 +162,5 @@ public class GenerateSpikesAndGold : MonoBehaviour
     {
         _isActive = true;
     }
-    
+
 }

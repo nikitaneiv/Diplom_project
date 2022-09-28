@@ -9,6 +9,7 @@ public class SaveController : MonoBehaviour
     {
         public int Golds = 0;
         public int Score = 0;
+        public int BestScore = 0;
     }
 
     public GameData LoadData()
