@@ -29,18 +29,20 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         GenerateMouse();
+        _gameData.Score = 0;
         UIController.ShowGameScreen();
         _goldText.text = _gameData.Golds.ToString();
+        _bestScoreText.text = _gameData.BestScore.ToString();
         _player.AddGold += AddGold;
         _player.OnDied += Dead;
         StartCoroutine(ScoreCounterCoroutine());
-        BestScoreSave();
     }
 
     private void Dead()
     {
         UIController.ShowLoseScreen();
         StopCoroutine(ScoreCounterCoroutine());
+        BestScoreSave();
         _saveController.SaveData(_gameData);
     }
     
@@ -59,9 +61,10 @@ public class GameManager : MonoBehaviour
 
     private void BestScoreSave()
     {
-        if (_gameData.Score > _gameData.Score)
+        if (_gameData.Score > _gameData.BestScore)
         {
-            _bestScoreText.text = _gameData.Golds.ToString();
+            _gameData.BestScore = _gameData.Score;
+            _bestScoreText.text = _gameData.BestScore.ToString();
         }
     }
 
