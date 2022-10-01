@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
     public class PlayerController : MonoBehaviour
     {
@@ -16,22 +17,23 @@ using UnityEngine;
 
         private SpriteRenderer _spriteRenderer;
         private Health _health;
+        private SwipeController _swipeController;
         
         public event Action AddGold;
         public event Action OnDied;
-        
+
         private int lives = 3;
         public int Lives
         {
             get { return lives; }
             set
             {
-                if (value < 3) lives = value;
+                if (value <= 3) lives = value;
                 _health.Refresh();
             }
         }
-        
-        private void Start()
+
+        public void StartComponent()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             targetPos = transform.position;
@@ -41,6 +43,10 @@ using UnityEngine;
         private void Update()
         {
             _animatorController.SetFlyTrigger();
+        }
+
+        private void FixedUpdate()
+        { 
             _health = FindObjectOfType<Health>();
         }
 
@@ -98,7 +104,7 @@ using UnityEngine;
             if (other.gameObject.GetComponent<Gold>())
             {
                 AddGold?.Invoke();
-                Debug.Log("+ 1 Gold");
+                //Debug.Log("+ 1 Gold");
             }
         }
 
@@ -108,9 +114,36 @@ using UnityEngine;
             if (lives == 0)
             {
                 OnDied?.Invoke();
-                Debug.Log("Game Over");
+                //Debug.Log("Game Over");
             }
         }
+
+        public void ReturnLive()
+        {
+            if (Lives == 0)
+            {
+                Lives++;
+                Lives++;
+                Lives++;
+            }
+
+            if (Lives == 1)
+            {
+                Lives++;
+                Lives++;
+            }
+
+            if (Lives == 2)
+            {
+                Lives++;
+            }
+
+        }
+        //Перезапуск сцены
+        // public void Restart()
+        // {
+        //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // }
     }
 
 

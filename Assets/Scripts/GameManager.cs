@@ -14,28 +14,48 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SaveController _saveController;
     [SerializeField] private GameObject mousePrefab;
 
-    private GameObject mouse;
+    //private GameObject mouse;
     private GameData _gameData;
     private PlayerController _player;
+    private Health _health;
 
     public PlayerController Player => _player;
 
+    private GameObject mouse;
+
     private void Awake()
     {
-        UIController.ShowStartScreen();
         _gameData = _saveController.LoadData();
+    }
+
+    private void Start()
+    {
+        UIController.ShowStartScreen();
+        GenerateMouse();
+        mouse.SetActive(false);
+        _player.AddGold += AddGold;
+        _player.OnDied += Dead;
+        StartCoroutine(ScoreCounterCoroutine());
     }
 
     public void StartGame()
     {
-        GenerateMouse();
+        ResetGame();
+    }
+
+    public void ResetGame()
+    {
         _gameData.Score = 0;
-        UIController.ShowGameScreen();
         _goldText.text = _gameData.Golds.ToString();
         _bestScoreText.text = _gameData.BestScore.ToString();
-        _player.AddGold += AddGold;
-        _player.OnDied += Dead;
-        StartCoroutine(ScoreCounterCoroutine());
+        mouse.SetActive(true);
+        UIController.ShowGameScreen();
+        _player.ReturnLive();
+    }
+
+    public void MenuGame()
+    {
+        UIController.ShowStartScreen();
     }
 
     private void Dead()
@@ -43,9 +63,16 @@ public class GameManager : MonoBehaviour
         UIController.ShowLoseScreen();
         StopCoroutine(ScoreCounterCoroutine());
         BestScoreSave();
+        mouse.SetActive(false);
         _saveController.SaveData(_gameData);
     }
-    
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        _saveController.SaveData(_gameData);
+    }
+
     private void AddGold()
     {
         _gameData.Golds++;
@@ -56,7 +83,8 @@ public class GameManager : MonoBehaviour
     {
         mouse = Instantiate(mousePrefab, transform);
         mouse.transform.localPosition = new Vector3(-1.3f, -2f, 0f);
-        _player= mouse.GetComponent<PlayerController>();
+        _player = mouse.GetComponent<PlayerController>();
+        _player.StartComponent();
     }
 
     private void BestScoreSave()
@@ -77,6 +105,5 @@ public class GameManager : MonoBehaviour
             _scoreText.text = _gameData.Score.ToString();
         }
     }
-
 }
 

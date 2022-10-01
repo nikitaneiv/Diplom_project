@@ -63,7 +63,6 @@ public class SwipeController : MonoBehaviour
             }
             SendSwipe();
         }
-
     }
 
     private void SendSwipe()
@@ -75,7 +74,7 @@ public class SwipeController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Click");
+            //Debug.Log("Click");
             ClickEvent?.Invoke(TouchPosition());
         }
         

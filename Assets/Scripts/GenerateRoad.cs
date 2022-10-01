@@ -29,7 +29,6 @@ public class GenerateRoad : MonoBehaviour
     }
     private void Start()
     {
-        ResetLevel();
         StartLevel();
     }
 
@@ -55,7 +54,7 @@ public class GenerateRoad : MonoBehaviour
         }
     }
 
-    public void ResetLevel()
+    private void ResetLevel()
     {
         _setting.Speed = 0;
         while (roads.Count > 0)
@@ -69,8 +68,9 @@ public class GenerateRoad : MonoBehaviour
             CreateNextRoad();
         }
     }
-    private void StartLevel()
+    public void StartLevel()
     {
+        ResetLevel();
         _setting.Speed = 3f;
     }
 

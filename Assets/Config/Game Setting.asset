@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1952d6f098384f1a87728aa2f951b3f4, type: 3}
   m_Name: Game Setting
   m_EditorClassIdentifier: 
-  speed: 0
-  maxSpeed: 0
-  maxRoadCount: 0
-  maxSpikesCount: 0
-  maxGoldsCount: 0
+  speed: 3.009613
+  maxSpeed: 5
+  maxRoadCount: 3
+  maxSpikesCount: 4
+  maxGoldsCount: 4

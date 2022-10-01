@@ -2,7 +2,7 @@ using UnityEngine;
 
     public class Health : MonoBehaviour
     {
-        private Transform[] _hearts = new Transform[3];
+        public Transform[] _hearts = new Transform[3];
         
         private GameManager _manager;
 
@@ -21,5 +21,5 @@ using UnityEngine;
                 if (i < _manager.Player.Lives) _hearts[i].gameObject.SetActive(true);
                 else _hearts[i].gameObject.SetActive(false);
             }
-        } 
+        }
     }

@@ -21,9 +21,7 @@ public class GenerateSpikesAndGold : MonoBehaviour
     Vector3 posGold = new Vector3 (-1.60f, 12, 0);
     
     private bool _isActive = false;
-    
-    private SaveController.GameData _gameData;
-    
+
     public bool IsActive
     {
         get
@@ -40,7 +38,6 @@ public class GenerateSpikesAndGold : MonoBehaviour
 
     private void Start()
     {
-        ResetLevel();
         StartLevel();
     }
     
@@ -86,7 +83,7 @@ public class GenerateSpikesAndGold : MonoBehaviour
         }
     }
     
-    public void ResetLevel()
+    private void ResetLevel()
     {
         _setting.Speed = 0;
         while (spikesLeft.Count > 0)
@@ -117,8 +114,9 @@ public class GenerateSpikesAndGold : MonoBehaviour
         }
     }
     
-    private void StartLevel()
+    public void StartLevel()
     {
+        ResetLevel();
         _setting.Speed = 3f;
     }
     
