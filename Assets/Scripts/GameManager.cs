@@ -13,8 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIController UIController;
     [SerializeField] private SaveController _saveController;
     [SerializeField] private GameObject mousePrefab;
-
-    //private GameObject mouse;
+    
     private GameData _gameData;
     private PlayerController _player;
     private Health _health;
@@ -58,20 +57,21 @@ public class GameManager : MonoBehaviour
     {
         UIController.ShowStartScreen();
     }
-
-    private void Dead()
-    {
-        UIController.ShowLoseScreen();
-        StopCoroutine(ScoreCounterCoroutine());
-        BestScoreSave();
-        mouse.SetActive(false);
-        _saveController.SaveData(_gameData);
-    }
-
+    
     public void QuitGame()
     {
         Application.Quit();
         _saveController.SaveData(_gameData);
+    }
+    
+    public void AfterReward()
+    {
+        _goldText.text = _gameData.Golds.ToString();
+        _bestScoreText.text = _gameData.BestScore.ToString();
+        mouse.SetActive(true);
+        UIController.ShowGameScreen();
+        _player.ReturnLive();
+        Time.timeScale = 1f;
     }
 
     private void AddGold()
@@ -86,6 +86,16 @@ public class GameManager : MonoBehaviour
         mouse.transform.localPosition = new Vector3(-1.3f, -2f, 0f);
         _player = mouse.GetComponent<PlayerController>();
         _player.StartComponent();
+    }
+    
+    private void Dead()
+    {
+        Time.timeScale = 0f;
+        UIController.ShowLoseScreen();
+        StopCoroutine(ScoreCounterCoroutine());
+        BestScoreSave();
+        mouse.SetActive(false);
+        _saveController.SaveData(_gameData);
     }
 
     private void BestScoreSave()
