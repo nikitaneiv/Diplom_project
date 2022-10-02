@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
         mouse.SetActive(true);
         UIController.ShowGameScreen();
         _player.ReturnLive();
+        Time.timeScale = 1f;
     }
 
     public void MenuGame()

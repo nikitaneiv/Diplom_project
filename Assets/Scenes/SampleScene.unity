@@ -737,7 +737,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 326952920}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 76770040}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &326952920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,9 +1288,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 76770040}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GenerateMouse
+      - m_Target: {fileID: 76770039}
+        m_TargetAssemblyTypeName: GenerateSpikesAndGold, Assembly-CSharp
+        m_MethodName: StartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1291,6 +1303,18 @@ MonoBehaviour:
       - m_Target: {fileID: 76770040}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 76770038}
+        m_TargetAssemblyTypeName: GenerateRoad, Assembly-CSharp
+        m_MethodName: StartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1879,6 +1903,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5f80356e31432298a980d730f29004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1215181387
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,7 +2522,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1610387370}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 76770040}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1610387370
 MonoBehaviour:
   m_ObjectHideFlags: 0

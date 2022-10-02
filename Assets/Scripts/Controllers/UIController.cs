@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
         [SerializeField] private GameObject _startScreen;
         [SerializeField] private GameObject _gameScreen;
         [SerializeField] private GameObject _loseScreen;
+        [SerializeField] private GameObject _pauseScreen;
     
         private GameObject _currentScreen;
     
@@ -26,7 +27,13 @@ public class UIController : MonoBehaviour
             _currentScreen.SetActive(false);
             _gameScreen.SetActive(true);
             _currentScreen = _gameScreen;
-    
+        }
+        
+        public void ShowPauseScreen()
+        {
+            _currentScreen.SetActive(false);
+            _pauseScreen.SetActive(true);
+            _currentScreen = _pauseScreen;
         }
         public void ShowLoseScreen()
         {
